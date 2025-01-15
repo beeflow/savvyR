@@ -1,3 +1,7 @@
+utils::globalVariables(c(
+  "month", "Month", "Budget", "Category", "Percentage", "amount", "total", "Amount"
+))
+
 #' Analyse Financial Trends
 #'
 #' This function performs an analysis of financial trends, including fixed expenses, 
@@ -64,11 +68,6 @@
 #'
 #' # Display the plot
 #' print(result$plot)
-
-utils::globalVariables(c(
-  "month", "Month", "Budget", "Category", "Percentage", "amount", "total", "Amount"
-))
-
 analyse_trends <- function(fixed_expenses_path, purchases_folder, financial_data_path, start_month, end_month) {
   # Load fixed expenses data
   fixed_expenses <- read.csv(fixed_expenses_path)
