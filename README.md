@@ -2,6 +2,8 @@
 
 **savvyR** is an R package designed to assist users in managing and analysing personal finances. It includes tools for visualising expenses, analysing savings, and identifying financial trends over time.
 
+Created as a final project of the CS50R Course: https://cs50.harvard.edu/r/2024/project/
+
 ## Features
 
 - **Visualise Expenses**: Create pie charts showing the proportion of fixed and variable expenses for a specific month.
