@@ -2,8 +2,8 @@ library(testthat)
 library(ggplot2)
 
 test_that("visualise_expenses generates a valid pie chart", {
-  fixed_expenses_path <- here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv")
-  purchases_path <- here::here("tests", "testthat", "fixtures", "purchases_2024-12.csv")
+  fixed_expenses_path <- testthat::test_path("fixtures/monthly_fixed_expenses.csv")
+  purchases_path <- testthat::test_path("fixtures/purchases_2024-12.csv")
   selected_month <- "2024-12"
   
   chart <- visualise_expenses(fixed_expenses_path, purchases_path, selected_month)

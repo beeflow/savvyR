@@ -2,9 +2,9 @@ library(testthat)
 library(here)
 
 # Specify the file paths
-fixed_expenses_path <- here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv")
+fixed_expenses_path <- testthat::test_path("fixtures/monthly_fixed_expenses.csv")
 purchases_folder <- here::here("tests", "testthat", "fixtures")
-financial_data_path <- here::here("tests", "testthat", "fixtures", "financial_data.csv")
+financial_data_path <- testthat::test_path("fixtures/financial_data.csv")
 
 test_that("analyse_trends produces correct output structure", {
   # Call the function

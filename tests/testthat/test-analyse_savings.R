@@ -1,8 +1,8 @@
 test_that("analyse_savings calculates fixed expenses correctly", {
   calculated_total <- analyse_savings(
-    fixed_expenses_path = here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv"),
-    financial_data_path = here::here("tests", "testthat", "fixtures", "financial_data.csv"),
-    purchases_path = here::here("tests", "testthat", "fixtures", "purchases_2024-12.csv"),
+    fixed_expenses_path = testthat::test_path("fixtures/monthly_fixed_expenses.csv"),
+    financial_data_path = testthat::test_path("fixtures/financial_data.csv"),
+    purchases_path = testthat::test_path("fixtures/purchases_2024-12.csv"),
     selected_month = "2024-12"
   )$fixed_expenses
   
@@ -11,9 +11,9 @@ test_that("analyse_savings calculates fixed expenses correctly", {
 
 test_that("analyse_savings calculates variable expenses correctly", {
   calculated_total <- analyse_savings(
-    fixed_expenses_path = here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv"),
-    financial_data_path = here::here("tests", "testthat", "fixtures", "financial_data.csv"),
-    purchases_path = here::here("tests", "testthat", "fixtures", "purchases_2024-12.csv"),
+    fixed_expenses_path = testthat::test_path("fixtures/monthly_fixed_expenses.csv"),
+    financial_data_path = testthat::test_path("fixtures/financial_data.csv"),
+    purchases_path = testthat::test_path("fixtures/purchases_2024-12.csv"),
     selected_month = "2024-12"
   )$variable_expenses
   
@@ -22,9 +22,9 @@ test_that("analyse_savings calculates variable expenses correctly", {
 
 test_that("analyse_savings calculates total expenses correctly", {
   calculated_total <- analyse_savings(
-    fixed_expenses_path = here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv"),
-    financial_data_path = here::here("tests", "testthat", "fixtures", "financial_data.csv"),
-    purchases_path = here::here("tests", "testthat", "fixtures", "purchases_2024-12.csv"),
+    fixed_expenses_path = testthat::test_path("fixtures/monthly_fixed_expenses.csv"),
+    financial_data_path = testthat::test_path("fixtures/financial_data.csv"),
+    purchases_path = testthat::test_path("fixtures/purchases_2024-12.csv"),
     selected_month = "2024-12"
   )$total_expenses
   
@@ -33,9 +33,9 @@ test_that("analyse_savings calculates total expenses correctly", {
 
 test_that("analyse_savings calculates savings correctly", {
   calculated_savings <- analyse_savings(
-    fixed_expenses_path = here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv"),
-    financial_data_path = here::here("tests", "testthat", "fixtures", "financial_data.csv"),
-    purchases_path = here::here("tests", "testthat", "fixtures", "purchases_2024-12.csv"),
+    fixed_expenses_path = testthat::test_path("fixtures/monthly_fixed_expenses.csv"),
+    financial_data_path = testthat::test_path("fixtures/financial_data.csv"),
+    purchases_path = testthat::test_path("fixtures/purchases_2024-12.csv"),
     selected_month = "2024-12"
   )$savings
   
