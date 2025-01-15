@@ -6,15 +6,16 @@ Authors@R: person("Rafal", "Przetakowski", email = "rprzetakowski@gmail.com", ro
 Description: A package for managing and analysing personal finances, including expense tracking, budget visualisation, and savings forecasting.
 Depends: 
     R (>= 4.0.0)
+Imports: 
     ggplot2,
     dplyr,
-    readr,
-    lubridate
-License: MIT
+    lubridate,
+    tidyr
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Video:
 Suggests: 
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
     here
 Config/testthat/edition: 3
+RoxygenNote: 7.3.2

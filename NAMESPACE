@@ -1,3 +1,11 @@
 export(analyse_savings)
 export(visualise_expenses)
 export(analyse_trends)
+
+import(ggplot2)
+importFrom(dplyr,bind_rows)
+importFrom(dplyr,filter)
+importFrom(dplyr,pull)
+importFrom(dplyr,summarise)
+importFrom(lubridate,ymd)
+importFrom(tidyr,pivot_longer)
