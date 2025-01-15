@@ -31,9 +31,9 @@ This function calculates fixed expenses, variable expenses, and savings as perce
 }
 \examples{
 # Example file paths
-fixed_expenses_path <- here::here("tests", "testthat", "fixtures", "monthly_fixed_expenses.csv")
-purchases_folder <- here::here("tests", "testthat", "fixtures")
-financial_data_path <- here::here("tests", "testthat", "fixtures", "financial_data.csv")
+fixed_expenses_path <- "path/to/monthly_fixed_expenses.csv"
+purchases_folder <- "path/to/csv_files"
+financial_data_path <- "path/to/financial_data.csv"
 
 # Run the function
 result <- analyse_trends(

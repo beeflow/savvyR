@@ -17,7 +17,7 @@ visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
 }
 \examples{
 fixed_expenses_path <- "path/to/fixed_expenses.csv"
-purchases_path <- "path/to/purchases.csv"
+purchases_path <- "path/to/purchases_2024-12.csv"
 selected_month <- "2024-12"
 
 chart <- visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
