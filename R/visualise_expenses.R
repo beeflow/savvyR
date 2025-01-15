@@ -32,6 +32,8 @@
 #'   amount = c(150, 300)
 #' ), purchases_path, row.names = FALSE)
 #'
+#' # Or use your own CSV files
+#' 
 #' # Specify the selected month
 #' selected_month <- "2025-01"
 #'

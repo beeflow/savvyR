@@ -51,6 +51,8 @@
 #'           file.path(purchases_folder, "purchases_2025-02.csv"), 
 #'           row.names = FALSE)
 #'
+#' # Or use your own CSV files
+#'
 #' # Run the function
 #' result <- analyse_trends(
 #'   fixed_expenses_path = fixed_expenses_path,
@@ -62,6 +64,11 @@
 #'
 #' # Display the plot
 #' print(result$plot)
+
+utils::globalVariables(c(
+  "month", "Month", "Budget", "Category", "Percentage", "amount", "total", "Amount"
+))
+
 analyse_trends <- function(fixed_expenses_path, purchases_folder, financial_data_path, start_month, end_month) {
   # Load fixed expenses data
   fixed_expenses <- read.csv(fixed_expenses_path)

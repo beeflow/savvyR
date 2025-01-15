@@ -2,7 +2,9 @@ export(analyse_savings)
 export(visualise_expenses)
 export(analyse_trends)
 
+
 import(ggplot2)
+importFrom(utils, read.csv)
 importFrom(dplyr,bind_rows)
 importFrom(dplyr,filter)
 importFrom(dplyr,pull)

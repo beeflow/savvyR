@@ -38,6 +38,8 @@
 #'                      amount = c(150, 300)), 
 #'           purchases_path, row.names = FALSE)
 #' 
+#' # Or use your own CSV files
+#' 
 #' # Run the function
 #' results <- analyse_savings(fixed_expenses_path, financial_data_path, purchases_path, "2025-01")
 #' print(results)
