@@ -1,12 +1,49 @@
-library(ggplot2)
-library(dplyr)
-library(readr)
-library(lubridate)
-
+#' Visualise Monthly Expenses
+#'
+#' This function generates a pie chart visualising the distribution of expenses for a selected month, 
+#' including fixed expenses, variable expenses, and the remaining budget.
+#'
+#' @param fixed_expenses_path A string specifying the path to the CSV file containing fixed expenses data.
+#' The file should include at least two columns: "title" and "amount".
+#' @param purchases_path A string specifying the path to the CSV file containing purchases data for the selected month.
+#' The file should include columns "date", "place", "item", and "amount", with dates formatted as "YYYY-MM-DD".
+#' @param selected_month A string specifying the month to visualise, formatted as "YYYY-MM".
+#' 
+#' @return A `ggplot2` pie chart object visualising the distribution of fixed expenses, 
+#' variable expenses, and the remaining budget as proportions of total income.
+#'
+#' @import ggplot2
+#' @importFrom dplyr summarise pull
+#' @importFrom lubridate ymd
+#'
+#' @examples
+#' # Example usage:
+#' # Create temporary file paths
+#' fixed_expenses_path <- tempfile(fileext = ".csv")
+#' purchases_path <- tempfile(fileext = ".csv")
+#'
+#' # Write sample data to files
+#' write.csv(data.frame(title = c("Rent", "Utilities"), amount = c(1000, 200)), 
+#'           fixed_expenses_path, row.names = FALSE)
+#' write.csv(data.frame(
+#'   date = c("2025-01-01", "2025-01-02"), 
+#'   place = c("Supermarket", "Online Store"), 
+#'   item = c("Groceries", "Electronics"), 
+#'   amount = c(150, 300)
+#' ), purchases_path, row.names = FALSE)
+#'
+#' # Specify the selected month
+#' selected_month <- "2025-01"
+#'
+#' # Generate the pie chart
+#' pie_chart <- visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
+#'
+#' # Display the chart
+#' print(pie_chart)
 visualise_expenses <- function(fixed_expenses_path, purchases_path, selected_month) {
   # Load data
-  fixed_expenses <- read_csv(fixed_expenses_path, show_col_types = FALSE)
-  purchases <- read_csv(purchases_path, show_col_types = FALSE)
+  fixed_expenses <- read.csv(fixed_expenses_path)
+  purchases <- read.csv(purchases_path)
   
   # Summarise fixed expenses
   total_fixed_expenses <- fixed_expenses |>
@@ -14,7 +51,7 @@ visualise_expenses <- function(fixed_expenses_path, purchases_path, selected_mon
     pull(total)
   
   # Summarise variable expenses for the selected month
-  total_variable_expenses <- purchases %>% 
+  total_variable_expenses <- purchases |>
     summarise(total = sum(amount, na.rm = TRUE)) |>
     pull(total)
   

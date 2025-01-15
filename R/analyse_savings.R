@@ -1,3 +1,46 @@
+#' Analyse Monthly Savings and Expenses
+#'
+#' This function provides an analysis of monthly savings, expenses, and remaining budget 
+#' based on data from fixed expenses, financial records, and purchase transactions for a specified month.
+#'
+#' @param fixed_expenses_path A string specifying the path to the CSV file containing fixed expenses data.
+#' The file should include at least two columns: "title" and "amount".
+#' @param financial_data_path A string specifying the path to the CSV file containing financial data.
+#' The file should include columns "month", "income", and "budget".
+#' @param purchases_path A string specifying the path to the CSV file containing purchase transaction data.
+#' The file should include columns "date", "place", "item", and "amount".
+#' @param selected_month A string specifying the month to analyse, formatted as "YYYY-MM".
+#'
+#' @return A named list containing the following elements, all rounded to two decimal places:
+#' \item{fixed_expenses}{The total fixed expenses for the selected month.}
+#' \item{variable_expenses}{The total variable expenses based on purchase transactions.}
+#' \item{total_expenses}{The total of fixed and variable expenses.}
+#' \item{remaining_budget}{The remaining budget after accounting for variable expenses.}
+#' \item{savings}{The calculated savings as the difference between income and total expenses.}
+#' 
+#' @importFrom dplyr filter
+#' 
+#' @examples
+#' # Example usage:
+#' # Create temporary file paths
+#' fixed_expenses_path <- tempfile(fileext = ".csv")
+#' financial_data_path <- tempfile(fileext = ".csv")
+#' purchases_path <- tempfile(fileext = ".csv")
+#' 
+#' # Write sample data to files
+#' write.csv(data.frame(title = c("Rent", "Utilities"), amount = c(1000, 200)), 
+#'           fixed_expenses_path, row.names = FALSE)
+#' write.csv(data.frame(month = c("2025-01"), income = c(3000), budget = c(1000)), 
+#'           financial_data_path, row.names = FALSE)
+#' write.csv(data.frame(date = c("2025-01-01", "2025-01-02"), 
+#'                      place = c("Supermarket", "Online Store"), 
+#'                      item = c("Groceries", "Electronics"), 
+#'                      amount = c(150, 300)), 
+#'           purchases_path, row.names = FALSE)
+#' 
+#' # Run the function
+#' results <- analyse_savings(fixed_expenses_path, financial_data_path, purchases_path, "2025-01")
+#' print(results)
 analyse_savings <- function(
   fixed_expenses_path,
   financial_data_path,
@@ -5,9 +48,9 @@ analyse_savings <- function(
   selected_month
 ) {
   # Load data
-  fixed_expenses <- readr::read_csv(fixed_expenses_path, show_col_types = FALSE)
-  financial_data <- readr::read_csv(financial_data_path, show_col_types = FALSE)
-  purchases <- readr::read_csv(purchases_path, show_col_types = FALSE)
+  fixed_expenses <- read.csv(fixed_expenses_path)
+  financial_data <- read.csv(financial_data_path)
+  purchases <- read.csv(purchases_path)
 
   # Validate selected month in financial data
   financial_month <- financial_data |> dplyr::filter(month == selected_month)

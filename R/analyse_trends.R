@@ -1,15 +1,77 @@
-library(ggplot2)
-
+#' Analyse Financial Trends
+#'
+#' This function performs an analysis of financial trends, including fixed expenses, 
+#' variable expenses, savings, and budget, over a specified range of months. It produces
+#' both a visualisation of the trends and a summary data frame for further analysis.
+#'
+#' @param fixed_expenses_path A string specifying the path to the CSV file containing fixed expenses data.
+#' The file should include at least two columns: "title" and "amount".
+#' @param purchases_folder A string specifying the path to the folder containing monthly purchase CSV files.
+#' Each file should include columns "date", "place", "item", and "amount", with dates formatted as "YYYY-MM-DD".
+#' @param financial_data_path A string specifying the path to the CSV file containing financial data.
+#' The file should include columns "month", "income", and "budget".
+#' @param start_month A string specifying the start month of the analysis, formatted as "YYYY-MM".
+#' @param end_month A string specifying the end month of the analysis, formatted as "YYYY-MM".
+#'
+#' @return A named list containing:
+#' \item{plot}{A `ggplot2` object visualising the trends in expenses, savings, and budget.}
+#' \item{data}{A data frame summarising fixed expenses, variable expenses, savings, and budget as percentages of income for each month.}
+#'
+#' @import ggplot2
+#' @importFrom dplyr bind_rows filter
+#' @importFrom lubridate ymd
+#' @importFrom tidyr pivot_longer
+#'
+#' @examples
+#' # Example usage:
+#' # Create temporary file paths and folder
+#' fixed_expenses_path <- tempfile(fileext = ".csv")
+#' financial_data_path <- tempfile(fileext = ".csv")
+#' purchases_folder <- tempfile()
+#' dir.create(purchases_folder)
+#'
+#' # Write sample data to files
+#' write.csv(data.frame(title = c("Rent", "Utilities"), amount = c(1000, 200)), 
+#'           fixed_expenses_path, row.names = FALSE)
+#' write.csv(data.frame(month = c("2025-01", "2025-02", "2025-03"), 
+#'                      income = c(3000, 3000, 3000), 
+#'                      budget = c(1000, 1000, 1000)), 
+#'           financial_data_path, row.names = FALSE)
+#' write.csv(data.frame(date = c("2025-01-01", "2025-01-02"), 
+#'                      place = c("Supermarket", "Online Store"), 
+#'                      item = c("Groceries", "Electronics"), 
+#'                      amount = c(150, 300)), 
+#'           file.path(purchases_folder, "purchases_2025-01.csv"), 
+#'           row.names = FALSE)
+#' 
+#' write.csv(data.frame(date = c("2025-02-01", "2025-02-02"), 
+#'                      place = c("Supermarket", "Online Store"), 
+#'                      item = c("Groceries", "Electronics"), 
+#'                      amount = c(200, 350)), 
+#'           file.path(purchases_folder, "purchases_2025-02.csv"), 
+#'           row.names = FALSE)
+#'
+#' # Run the function
+#' result <- analyse_trends(
+#'   fixed_expenses_path = fixed_expenses_path,
+#'   purchases_folder = purchases_folder,
+#'   financial_data_path = financial_data_path,
+#'   start_month = "2025-01",
+#'   end_month = "2025-03"
+#' )
+#'
+#' # Display the plot
+#' print(result$plot)
 analyse_trends <- function(fixed_expenses_path, purchases_folder, financial_data_path, start_month, end_month) {
   # Load fixed expenses data
-  fixed_expenses <- readr::read_csv(fixed_expenses_path, show_col_types = FALSE)
+  fixed_expenses <- read.csv(fixed_expenses_path)
 
   # Load financial data
-  financial_data <- readr::read_csv(financial_data_path, show_col_types = FALSE)
+  financial_data <- read.csv(financial_data_path)
 
   # Load purchase data from all files in the specified folder
   all_files <- list.files(purchases_folder, pattern = "*.csv", full.names = TRUE)
-  all_purchases <- lapply(all_files, readr::read_csv, show_col_types = FALSE)
+  all_purchases <- lapply(all_files, read.csv)
   purchases <- dplyr::bind_rows(all_purchases)
 
   # Ensure purchases has the correct structure even if the folder is empty
