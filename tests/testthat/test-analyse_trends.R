@@ -1,6 +1,3 @@
-library(testthat)
-library(here)
-
 # Specify the file paths
 fixed_expenses_path <- testthat::test_path("fixtures/monthly_fixed_expenses.csv")
 purchases_folder <- here::here("tests", "testthat", "fixtures")

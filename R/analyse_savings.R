@@ -53,7 +53,7 @@ analyse_savings <- function(
   fixed_expenses <- read.csv(fixed_expenses_path)
   financial_data <- read.csv(financial_data_path)
   purchases <- read.csv(purchases_path)
-
+  
   # Validate selected month in financial data
   financial_month <- financial_data |> dplyr::filter(month == selected_month)
   if (nrow(financial_month) == 0) {
@@ -73,9 +73,11 @@ analyse_savings <- function(
 
   # Return results with final rounding
   list(
+    income = round(financial_month$income, 2),
     fixed_expenses = round(total_fixed_expenses, 2),
     variable_expenses = round(total_variable_expenses, 2),
     total_expenses = round(total_expenses, 2),
+    planned_budget = round(financial_month$budget, 2),
     remaining_budget = round(remaining_budget, 2),
     savings = round(savings, 2)
   )

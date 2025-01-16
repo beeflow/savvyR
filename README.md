@@ -47,6 +47,8 @@ print(expense_chart)
 ### Example 2: Analysing Savings for a Specific Month
 
 ``` r
+library(savvyR)
+
 # File paths
 fixed_expenses_path <- "path/to/fixed_expenses.csv"
 purchases_path <- "path/to/purchases_2024-12.csv"
@@ -56,13 +58,15 @@ financial_data_path <- "path/to/financial_data.csv"
 selected_month <- "2024-12"
 
 # Generate savings analysis
-savings_chart <- analyse_savings(financial_data_path, fixed_expenses_path, purchases_path, selected_month)
+savings_chart <- analyse_savings(fixed_expenses_path, financial_data_path, purchases_path, selected_month)
 print(savings_chart)
 ```
 
 ### Example 3: Analysing Trends Over a Date Range
 
 ``` r
+library(savvyR)
+
 # Folder containing monthly purchases files in the format "purchases_YYYY-MM.csv"
 purchases_folder <- "path/to/purchases_folder"
 fixed_expenses_path <- "path/to/fixed_expenses.csv"
