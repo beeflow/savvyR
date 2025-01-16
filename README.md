@@ -33,13 +33,14 @@ library(savvyR)
 
 # File paths
 fixed_expenses_path <- "path/to/fixed_expenses.csv"
+financial_data <- "path/to/financial_data.csv"
 purchases_path <- "path/to/purchases_2024-12.csv"
 
 # Selected month
 selected_month <- "2024-12"
 
 # Generate expense visualisation
-expense_chart <- visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
+expense_chart <- visualise_expenses(fixed_expenses_path, financial_data, purchases_path, selected_month)
 print(expense_chart)
 ```
 
