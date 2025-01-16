@@ -17,5 +17,6 @@ LazyData: true
 Suggests: 
     testthat (>= 3.0.0),
     here
+Video: https://youtu.be/9E4ynaYlq68
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2

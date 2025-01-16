@@ -4,6 +4,10 @@
 
 Created as a final project of the CS50R Course: <https://cs50.harvard.edu/r/2024/project/>
 
+Video presentation: <https://youtu.be/9E4ynaYlq68>
+
+GitHub: <https://github.com/beeflow/savvyR>
+
 ## Features
 
 -   **Visualise Expenses**: Create pie charts showing the proportion of fixed and variable expenses for a specific month.
