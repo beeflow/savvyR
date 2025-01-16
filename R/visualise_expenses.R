@@ -21,6 +21,7 @@
 #' # Create temporary file paths
 #' fixed_expenses_path <- tempfile(fileext = ".csv")
 #' purchases_path <- tempfile(fileext = ".csv")
+#' financial_data_path <- tempfile(fileext = ".csv")
 #'
 #' # Write sample data to files
 #' write.csv(data.frame(title = c("Rent", "Utilities"), amount = c(1000, 200)), 
@@ -31,20 +32,22 @@
 #'   item = c("Groceries", "Electronics"), 
 #'   amount = c(150, 300)
 #' ), purchases_path, row.names = FALSE)
-#'
+#' write.csv(data.frame(month = c("2025-01"), income = c(3000), budget = c(1000)), 
+#'           financial_data_path, row.names = FALSE)
 #' # Or use your own CSV files
 #' 
 #' # Specify the selected month
 #' selected_month <- "2025-01"
 #'
 #' # Generate the pie chart
-#' pie_chart <- visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
+#' pie_chart <- visualise_expenses(fixed_expenses_path,financial_data_path, purchases_path, selected_month)
 #'
 #' # Display the chart
 #' print(pie_chart)
-visualise_expenses <- function(fixed_expenses_path, purchases_path, selected_month) {
+visualise_expenses <- function(fixed_expenses_path, financial_data_path, purchases_path, selected_month) {
   # Load data
   fixed_expenses <- read.csv(fixed_expenses_path)
+  financial_data <- read.csv(financial_data_path)
   purchases <- read.csv(purchases_path)
   
   # Summarise fixed expenses
@@ -59,17 +62,25 @@ visualise_expenses <- function(fixed_expenses_path, purchases_path, selected_mon
   
   # Calculate total expenses
   total_expenses <- total_fixed_expenses + total_variable_expenses
-  
+  remaining_budget <- financial_data$income[financial_data$month == selected_month] - total_expenses
+    
   # Create a data frame for visualization
   expense_data <- data.frame(
     Category = c("Fixed Expenses", "Variable Expenses", "Remaining Budget"),
-    Amount = c(total_fixed_expenses, total_variable_expenses, -total_expenses)
+    Amount = c(total_fixed_expenses, total_variable_expenses, remaining_budget)
   )
   
   # Create a pie chart
   pie_chart <- ggplot(expense_data, aes(x = "", y = Amount, fill = Category)) +
     geom_bar(stat = "identity", width = 1) +
     coord_polar(theta = "y") +
+    geom_text(
+      aes(
+        label = paste0(sprintf("£%.2f", Amount)),
+        y = Amount
+      ),
+      color = "black", size = 4
+    ) +
     labs(
       title = paste("Expense Distribution for", selected_month),
       fill = "Category",

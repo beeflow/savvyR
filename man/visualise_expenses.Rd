@@ -4,7 +4,12 @@
 \alias{visualise_expenses}
 \title{Visualise Monthly Expenses}
 \usage{
-visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
+visualise_expenses(
+  fixed_expenses_path,
+  financial_data_path,
+  purchases_path,
+  selected_month
+)
 }
 \arguments{
 \item{fixed_expenses_path}{A string specifying the path to the CSV file containing fixed expenses data.
@@ -28,6 +33,7 @@ including fixed expenses, variable expenses, and the remaining budget.
 # Create temporary file paths
 fixed_expenses_path <- tempfile(fileext = ".csv")
 purchases_path <- tempfile(fileext = ".csv")
+financial_data_path <- tempfile(fileext = ".csv")
 
 # Write sample data to files
 write.csv(data.frame(title = c("Rent", "Utilities"), amount = c(1000, 200)), 
@@ -38,14 +44,15 @@ write.csv(data.frame(
   item = c("Groceries", "Electronics"), 
   amount = c(150, 300)
 ), purchases_path, row.names = FALSE)
-
+write.csv(data.frame(month = c("2025-01"), income = c(3000), budget = c(1000)), 
+          financial_data_path, row.names = FALSE)
 # Or use your own CSV files
 
 # Specify the selected month
 selected_month <- "2025-01"
 
 # Generate the pie chart
-pie_chart <- visualise_expenses(fixed_expenses_path, purchases_path, selected_month)
+pie_chart <- visualise_expenses(fixed_expenses_path,financial_data_path, purchases_path, selected_month)
 
 # Display the chart
 print(pie_chart)
